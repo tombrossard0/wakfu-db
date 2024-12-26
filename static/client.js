@@ -12,7 +12,7 @@ async function processMessage(message) {
     }
 }
 
-const ws = new WebSocket(`ws://wakfu-db.onrender.com:8080`);
+const ws = new WebSocket(`wss://wakfu-db.onrender.com`);
 
 ws.onopen = () => {
     console.log("WebSocket connection established");

@@ -10,8 +10,8 @@ const { readFile, writeFile } = require('./utils/file-manager.js');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+// const server = http.createServer(app);
+const wss = new WebSocket.Server({ noServer: true });
 
 app.use(express.static("static"));
 
@@ -106,6 +106,12 @@ async function updateDB() {
     console.log("Check done successfully!");
 }
 
-app.listen(port, async () => {
+const httpServer = app.listen(port, async () => {
     console.log(`app listening on port ${port}`);
+});
+
+httpServer.on('upgrade', (req, socket, head) => {
+    wss.handleUpgrade(req, socket, head, (ws) => {
+        wss.emit('connection', ws, req);
+    });
 });

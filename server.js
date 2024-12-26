@@ -1,14 +1,17 @@
 const express = require('express');
 const axios = require('axios');
+const http = require('http');
 
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8080 });
 
 const path = require('path');
 const { readFile, writeFile } = require('./utils/file-manager.js');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 
 app.use(express.static("static"));
 

@@ -13,6 +13,7 @@ async function processMessage(message) {
 }
 
 const ws = new WebSocket(`wss://wakfu-db.onrender.com`);
+// const ws = new WebSocket(`ws://localhost:8080`);
 
 ws.onopen = () => {
     console.log("WebSocket connection established");
@@ -25,4 +26,8 @@ ws.onmessage = (event) => {
 
 ws.onclose = () => {
     console.log('WebSocket connection closed.');
+};
+
+ws.onerror = (error) => {
+    console.error('WebSocket Error:', error);
 };

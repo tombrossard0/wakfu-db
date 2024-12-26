@@ -104,5 +104,5 @@ async function updateDB() {
 }
 
 app.listen(port, async () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`app listening on port ${port}`);
 });
